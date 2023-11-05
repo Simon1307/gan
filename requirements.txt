@@ -1,0 +1,8 @@
+torch
+matplotlib
+numpy
+torchvision
+flask
+ipykernel
+pandas
+tqdm

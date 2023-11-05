@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monet Art Generator Web App</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+    <h1>Monet Art Generator Web App</h1>
+    <form action="/process" method="post" enctype="multipart/form-data">
+        <input type="file" name="input_image" accept="image/*" required>
+        <button type="submit">Generate Art</button>
+    </form>
+    <h2>Output Art</h2>
+    {% if output_image_path %}
+    <img src="{{ url_for('static', filename=output_image_path) }}" alt="Generated Art" style="max-width: 100%;">
+    {% endif %}
+
+</body>
+</html>

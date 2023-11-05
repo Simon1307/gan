@@ -1,0 +1,9 @@
+/logs/
+/gan-getting-started/
+/artifacts/
+/static/input/
+/static/output/
+/__pycache__/
+*/__pycache__/*
+*/*/__pycache__/*
+*.zip
