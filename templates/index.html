@@ -10,10 +10,19 @@
         <input type="file" name="input_image" accept="image/*" required>
         <button type="submit">Generate Art</button>
     </form>
-    <h2>Output Art</h2>
-    {% if output_image_path %}
-    <img src="{{ url_for('static', filename=output_image_path) }}" alt="Generated Art" style="max-width: 100%;">
-    {% endif %}
-
+    <div class="image-container">
+        <div class="image">
+            <h2>Input Image</h2>
+            {% if input_image_path %}
+            <img src="{{ url_for('static', filename=input_image_path) }}" alt="Input Art" style="max-width: 100%;">
+            {% endif %}
+        </div>
+        <div class="image">
+            <h2>Output Art</h2>
+            {% if output_image_path %}
+            <img src="{{ url_for('static', filename=output_image_path) }}" alt="Generated Art" style="max-width: 100%;">
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>

@@ -52,6 +52,7 @@ def process():
         # Save the input image with a unique identifier
         input_image_path = os.path.join('static', 'input', f'input_{timestamp}.jpg')
         input_image.save(input_image_path)
+        input_image_path = os.path.join('input', f'input_{timestamp}.jpg')
 
         # Save the generated image with a unique identifier
         output_image = transforms.ToPILImage()(output_tensor.squeeze(0))
@@ -61,8 +62,8 @@ def process():
 
         logging.info('Input image and generated image were aved')
 
-    return render_template('index.html', output_image_path=output_image_path)
+    return render_template('index.html', input_image_path=input_image_path, output_image_path=output_image_path)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
