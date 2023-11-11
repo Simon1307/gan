@@ -1,6 +1,7 @@
 # Monet Art Generator
 
-![Monet Art Generator](https://link-to-your-project-image.png)
+![Monet Art Generator Web App](assets/web_app_picture.jpg)
+
 
 ## Overview
 
