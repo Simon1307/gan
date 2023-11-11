@@ -13,16 +13,16 @@
     <div class="image-container">
         <div class="image">
             <h2>Input Image</h2>
-            {% if input_image_path %}
-            <img src="{{ url_for('static', filename=input_image_path) }}" alt="Input Art" style="max-width: 100%;">
+            {% if input_filename %}
+            <img src="{{ url_for('static', filename='input/' + input_filename) }}" alt="Input Art" style="max-width: 100%;">
             {% endif %}
         </div>
         <div class="image">
             <h2>Output Art</h2>
-            {% if output_image_path %}
-            <img src="{{ url_for('static', filename=output_image_path) }}" alt="Generated Art" style="max-width: 100%;">
+            {% if output_filename %}
+            <img src="{{ url_for('static', filename='output/' + output_filename) }}" alt="Generated Art" style="max-width: 100%;">
             
-            <a href="{{ url_for('download', filename=output_img_filename) }}" download="generated_art.jpg">
+            <a href="{{ url_for('download', filename=output_filename) }}" download="generated_art.jpg">
                 <button>Download Art</button>
             </a>
             

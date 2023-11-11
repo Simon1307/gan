@@ -50,19 +50,18 @@ def process():
 
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         # Save the input image with a unique identifier
-        input_image_path = os.path.join('static', 'input', f'input_{timestamp}.jpg')
+        input_filename = f'input_{timestamp}.jpg'
+        input_image_path = os.path.join('static', 'input', input_filename)
         input_image.save(input_image_path)
-        input_image_path = os.path.join('input', f'input_{timestamp}.jpg')
 
         # Save the generated image with a unique identifier
         output_image = transforms.ToPILImage()(output_tensor.squeeze(0))
-        output_image_path = os.path.join('static', 'output', f'output_{timestamp}.jpg')
+        output_filename = f'output_{timestamp}.jpg'
+        output_image_path = os.path.join('static', 'output', output_filename)
         output_image.save(output_image_path)
-        output_image_path = os.path.join('output', f'output_{timestamp}.jpg')
-        output_img_filename = f'output_{timestamp}.jpg'
         logging.info('Input image and generated image were saved')
 
-    return render_template('index.html', input_image_path=input_image_path, output_image_path=output_image_path, output_img_filename=output_img_filename)
+    return render_template('index.html', input_filename=input_filename, output_filename=output_filename)
 
 
 # Routine for downloading the generated image
