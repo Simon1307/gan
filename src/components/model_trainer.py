@@ -63,3 +63,4 @@ if __name__ == '__main__':
         train_fn(disc_P, disc_M, gen_M, gen_P, dataloader, opt_disc, opt_gen, L1, mse, d_scaler, g_scaler, epoch, device, lambda_cycle, lambda_identity)
 
     save_model(gen_M, model_path=model_path)
+    logging.info('Trained CycleGAN model saved to ' + model_path)

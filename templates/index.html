@@ -21,6 +21,11 @@
             <h2>Output Art</h2>
             {% if output_image_path %}
             <img src="{{ url_for('static', filename=output_image_path) }}" alt="Generated Art" style="max-width: 100%;">
+            
+            <a href="{{ url_for('download', filename=output_img_filename) }}" download="generated_art.jpg">
+                <button>Download Art</button>
+            </a>
+            
             {% endif %}
         </div>
     </div>

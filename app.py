@@ -2,7 +2,7 @@ import os
 import torch
 import torch.nn.functional as F
 from PIL import Image
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, send_from_directory
 from torchvision import transforms
 from src.components.model import Generator, ConvBlock, ResidualBlock
 from src.logger import logging
@@ -13,7 +13,7 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Load the pre-trained PyTorch model
-model = load_model(model_path='./artifacts/gen_M.pth', device='cpu')
+model = load_model(model_path='artifacts/gen_M.pth', device='cpu')
 model.eval()
 logging.info('Pretrained model loaded')
 
@@ -59,11 +59,17 @@ def process():
         output_image_path = os.path.join('static', 'output', f'output_{timestamp}.jpg')
         output_image.save(output_image_path)
         output_image_path = os.path.join('output', f'output_{timestamp}.jpg')
+        output_img_filename = f'output_{timestamp}.jpg'
+        logging.info('Input image and generated image were saved')
 
-        logging.info('Input image and generated image were aved')
+    return render_template('index.html', input_image_path=input_image_path, output_image_path=output_image_path, output_img_filename=output_img_filename)
 
-    return render_template('index.html', input_image_path=input_image_path, output_image_path=output_image_path)
+
+# Routine for downloading the generated image
+@app.route('/download/<filename>')
+def download(filename):
+    return send_from_directory('static/output', filename, as_attachment=True)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=True)

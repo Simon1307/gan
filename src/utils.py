@@ -12,7 +12,7 @@ def save_model(model, model_path):
 
 
 def load_model(model_path, device):
-    model = torch.load('./artifacts/gen_M.pth', map_location=device)
+    model = torch.load('artifacts/gen_M.pth', map_location=device)
     return model
 
 
@@ -28,8 +28,8 @@ class Config:
         self.lambda_cycle = 10
 
         # Dataset Paths
-        self.monet_ds = '/home/simon/projects/gan/gan-getting-started/monet_jpg_small'
-        self.photo_ds = '/home/simon/projects/gan/gan-getting-started/photo_jpg_small'
+        self.monet_ds = 'gan-getting-started/monet_jpg_small'
+        self.photo_ds = 'gan-getting-started/photo_jpg_small'
 
         # Transforms
         self.transforms = transforms.Compose([
@@ -44,7 +44,7 @@ class Config:
             ])
 
         # Model Paths
-        self.model_path = '/home/simon/projects/gan/artifacts/gen_M.pth'
+        self.model_path = 'artifacts/gen_M.pth'
 
 
 def seed_everything(seed=42):
@@ -111,7 +111,6 @@ def train_fn(disc_P, disc_M, gen_M, gen_P, loader, opt_disc, opt_gen, l1, mse, d
         # Sum discrimintator loss per epoch
         D_loss_total += D_loss.item()
 
-        # set the gradients to zero before starting to do backpropragation 
         opt_disc.zero_grad()
         # backpropagation
         d_scaler.scale(D_loss).backward()
@@ -138,7 +137,7 @@ def train_fn(disc_P, disc_M, gen_M, gen_P, loader, opt_disc, opt_gen, l1, mse, d
             # Compute l1 loss with original photo and generated original photo
             cycle_photo_loss = l1(photo, cycle_photo)
 
-            # identity loss (remove these for efficiency if you set lambda_identity=0)
+            # identity loss
             # identity_monet = gen_M(monet)
             # identity_photo = gen_P(photo)
             # identity_monet_loss = l1(monet, identity_monet)
@@ -161,11 +160,6 @@ def train_fn(disc_P, disc_M, gen_M, gen_P, loader, opt_disc, opt_gen, l1, mse, d
         g_scaler.scale(G_loss).backward()
         g_scaler.step(opt_gen)
         g_scaler.update()
-
-        # Save generated images
-        #if idx % 10 == 0:  # % 200
-        #    save_image(fake_photo * 0.5 + 0.5, f"drive/MyDrive/Sem 3/SRP/saved_images/train/photo_{idx}.png")
-        #    save_image(fake_monet * 0.5 + 0.5, f"drive/MyDrive/Sem 3/SRP/saved_images/train/monet_{idx}.png")
 
         # Update progress bar
         loop.set_postfix(P_real=P_reals / (idx + 1), P_fake=P_fakes / (idx + 1))
