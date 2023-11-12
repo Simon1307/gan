@@ -30,12 +30,6 @@ The model is deployed as a Flask web app. The application is containerized using
 - **Flask Web App**: Provides a user-friendly interface for uploading and generating art from images.
 - **Dockerized**: Easily deploy the application in a Docker container for consistent and reproducible environments.
 
-## Demo
-
-![Demo GIF](https://link-to-demo.gif)
-
-[Live Demo](https://your-app-url.com)
-
 ## Getting Started
 
 ### Prerequisites
